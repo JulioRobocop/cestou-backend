@@ -84,6 +84,10 @@ public class ListingService {
         return listingRepository.findBySeller(seller);
     }
 
+    public List<Listing> buyerListing(Employee buyer) {
+        return listingRepository.findByBuyer(buyer);
+    }
+
 }
 
 

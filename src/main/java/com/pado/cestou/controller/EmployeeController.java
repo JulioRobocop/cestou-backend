@@ -34,11 +34,16 @@ public class EmployeeController {
         String password = input.get("password");
         return employeeService.login(registration, password);
     }
-    
+
     @GetMapping("/{id}/listings")
-    public List<Listing> sellerListing(@PathVariable Long id) {
-        Employee employeeListings = employeeService.findById(id);
-        return listingService.sellerListing(employeeListings);
+    public List<Listing> getListings(@PathVariable Long id, @RequestParam String role) {
+        Employee employee = employeeService.findById(id);
+        if (role.equals("seller")) {
+            return listingService.sellerListing(employee);
+        } else if (role.equals("buyer")) {
+            return listingService.buyerListing(employee);
+        }
+        throw new RuntimeException("Role inválido. Use 'seller' ou 'buyer'");
     }
 
 
