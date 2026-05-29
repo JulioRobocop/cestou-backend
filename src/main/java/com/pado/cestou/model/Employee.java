@@ -2,6 +2,8 @@ package com.pado.cestou.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.aspectj.lang.annotation.RequiredTypes;
 
 @Entity
 @Table(name="employees")
@@ -23,6 +25,9 @@ public class Employee {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column
     private String password;
+
+    @Column(unique = true)
+    private String cellNumber;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -47,6 +52,8 @@ public class Employee {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setCellNumber(String cellNumber) { this.cellNumber = cellNumber; }
 
     public void setSector(Sector sector) {
         this.sector = sector;
@@ -74,6 +81,8 @@ public class Employee {
 
     public String getPassword() { return password; }
 
+    public String getCellNumber() { return cellNumber; }
+
     public Sector getSector() {
         return sector;
     }
@@ -81,6 +90,5 @@ public class Employee {
     public WorkShift getWorkShift() {
         return workShift;
     }
-
 
 }
