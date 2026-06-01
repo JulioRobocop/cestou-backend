@@ -45,6 +45,4 @@ public class EmployeeController {
         }
         throw new RuntimeException("Role inválido. Use 'seller' ou 'buyer'");
     }
-
-
 }
