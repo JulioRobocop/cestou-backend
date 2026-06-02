@@ -15,10 +15,12 @@ import java.util.Optional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
+    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.employeeRepository = employeeRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public Optional<Employee> findByEmail(String email) {
@@ -58,7 +60,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee login(int registration, String password) {
+    public String login(int registration, String password) {
         Optional<Employee> employee = employeeRepository.findByRegistration(registration);
         if (employee.isEmpty()) {
             throw new BadCredentialsException("Usuário não encontrado");
@@ -68,7 +70,7 @@ public class EmployeeService {
         if (!passwordEncoder.matches(password, found.getPassword())) {
             throw new BadCredentialsException("Senha incorreta");
         }
-        return found;
+        return jwtService.generateAccessToken(found);
     }
 
 }

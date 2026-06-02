@@ -29,10 +29,11 @@ public class EmployeeController {
 
 
     @PostMapping("/login")
-    public Employee loginUser(@RequestBody Map<String, String> input) {
+    public Map<String, String> loginUser(@RequestBody Map<String, String> input) {
         int registration = Integer.parseInt(input.get("registration"));
         String password = input.get("password");
-        return employeeService.login(registration, password);
+        String token = employeeService.login(registration, password);
+        return Map.of("token", token);
     }
 
     @GetMapping("/{id}/listings")
