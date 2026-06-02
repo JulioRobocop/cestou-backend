@@ -1,10 +1,15 @@
 package com.pado.cestou.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="listings")
+@Getter
+@Setter
 public class Listing {
 
     @Id
@@ -25,36 +30,4 @@ public class Listing {
 
     @Column(nullable = false, updatable = false)
     private final LocalDateTime createdAt = LocalDateTime.now();
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public void setSeller(Employee seller) {
-        this.seller = seller;
-    }
-
-    public void setBuyer(Employee buyer) {
-        this.buyer = buyer;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public Employee getSeller() {
-        return seller;
-    }
-
-    public Employee getBuyer() {
-        return buyer;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
 }

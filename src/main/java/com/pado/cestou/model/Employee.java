@@ -2,9 +2,13 @@ package com.pado.cestou.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="employees")
+@Getter
+@Setter
 public class Employee {
 
     @Id
@@ -34,59 +38,5 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     @Column
     private WorkShift workShift;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRegistration(int registration) {
-        this.registration = registration;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhoneNumberNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-
-    public void setSector(Sector sector) {
-        this.sector = sector;
-    }
-
-    public void setWorkShift(WorkShift workShift) {
-        this.workShift = workShift;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getRegistration() {
-        return registration;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() { return password; }
-
-    public String getPhoneNumber() { return phoneNumber; }
-
-    public Sector getSector() {
-        return sector;
-    }
-
-    public WorkShift getWorkShift() {
-        return workShift;
-    }
 
 }
