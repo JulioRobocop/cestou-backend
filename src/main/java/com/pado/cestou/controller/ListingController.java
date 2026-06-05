@@ -4,7 +4,9 @@ import com.pado.cestou.model.Employee;
 import com.pado.cestou.model.Listing;
 import com.pado.cestou.service.EmployeeService;
 import com.pado.cestou.service.ListingService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.ls.LSInput;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +16,15 @@ import java.util.Map;
 public class ListingController {
 
     private final ListingService listingService;
-    private final EmployeeService employeeService;
 
-    public ListingController(ListingService listingService, EmployeeService employeeService) {
+    public ListingController(ListingService listingService) {
         this.listingService = listingService;
-        this.employeeService = employeeService;
     }
 
     @PostMapping
-    public Listing createListing(@RequestBody Listing listing) {
+    public Listing createListing(@AuthenticationPrincipal Employee seller) {
+        Listing listing = new Listing();
+        listing.setSeller(seller);
         return listingService.createListing(listing);
     }
 
@@ -32,30 +34,22 @@ public class ListingController {
     }
 
     @PutMapping("/{id}/book")
-    public Listing bookListing(@PathVariable Long id, @RequestBody Map<String, Long> input) {
-        Long buyerId = input.get("employeeId");
-        Employee buyer = employeeService.findById(buyerId);
+    public Listing bookListing(@PathVariable Long id, @AuthenticationPrincipal Employee buyer) {
         return listingService.bookListing(id, buyer);
     }
 
     @PutMapping("/{id}/cancel-book")
-    public Listing cancelBook(@PathVariable Long id, @RequestBody Map<String, Long> input) {
-        Long employeeId = input.get("employeeId");
-        Employee employee = employeeService.findById(employeeId);
+    public Listing cancelBook(@PathVariable Long id, @AuthenticationPrincipal Employee employee) {
         return listingService.cancelBook(id, employee);
     }
 
     @PutMapping("/{id}/cancel")
-    public Listing cancelListing(@PathVariable Long id, @RequestBody Map<String, Long> input) {
-        Long employeeId = input.get("employeeId");
-        Employee employee = employeeService.findById(employeeId);
+    public Listing cancelListing(@PathVariable Long id, @AuthenticationPrincipal Employee employee) {
         return listingService.cancelListing(id, employee);
     }
 
     @PutMapping("/{id}/conclude")
-    public Listing concludedListing(@PathVariable Long id, @RequestBody Map<String, Long> input) {
-        Long employeeId = input.get("employeeId");
-        Employee employee = employeeService.findById(employeeId);
+    public Listing concludedListing(@PathVariable Long id, @AuthenticationPrincipal Employee employee) {
         return listingService.concludedListing(id, employee);
     }
 

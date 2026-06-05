@@ -36,14 +36,13 @@ public class EmployeeController {
         return Map.of("token", token);
     }
 
-    @GetMapping("/{id}/listings")
-    public List<Listing> getListings(@PathVariable Long id, @RequestParam String role) {
-        Employee employee = employeeService.findById(id);
-        if (role.equals("seller")) {
-            return listingService.sellerListing(employee);
-        } else if (role.equals("buyer")) {
-            return listingService.buyerListing(employee);
-        }
-        throw new RuntimeException("Role inválido. Use 'seller' ou 'buyer'");
-    }
+//    @GetMapping("/{id}/listings")
+//    public List<Listing> getListings(@RequestParam String role) {
+//        if (role.equals("seller")) {
+//            return listingService.sellerListing(employee);
+//        } else if (role.equals("buyer")) {
+//            return listingService.buyerListing(employee);
+//        }
+//        throw new RuntimeException("Role inválido. Use 'seller' ou 'buyer'");
+//    }
 }
