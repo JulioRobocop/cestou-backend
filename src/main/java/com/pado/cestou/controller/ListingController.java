@@ -53,4 +53,14 @@ public class ListingController {
         return listingService.concludedListing(id, employee);
     }
 
+    @GetMapping("/my")
+    public List<Listing> getMyListings(@AuthenticationPrincipal Employee employee, @RequestParam String role) {
+        if (role.equals("seller")) {
+            return listingService.sellerListing(employee);
+        } else if (role.equals("buyer")) {
+            return listingService.buyerListing(employee);
+        }
+        throw new RuntimeException("Role inválido. Use 'seller' ou 'buyer'");
+    }
+
 }

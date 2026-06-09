@@ -1,12 +1,9 @@
 package com.pado.cestou.controller;
 
 import com.pado.cestou.model.Employee;
-import com.pado.cestou.model.Listing;
 import com.pado.cestou.service.EmployeeService;
-import com.pado.cestou.service.ListingService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -14,11 +11,9 @@ import java.util.Map;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private final ListingService listingService;
 
-    public EmployeeController(EmployeeService employeeService, ListingService listingService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.listingService = listingService;
     }
     
 
@@ -35,14 +30,4 @@ public class EmployeeController {
         String token = employeeService.login(registration, password);
         return Map.of("token", token);
     }
-
-//    @GetMapping("/{id}/listings")
-//    public List<Listing> getListings(@RequestParam String role) {
-//        if (role.equals("seller")) {
-//            return listingService.sellerListing(employee);
-//        } else if (role.equals("buyer")) {
-//            return listingService.buyerListing(employee);
-//        }
-//        throw new RuntimeException("Role inválido. Use 'seller' ou 'buyer'");
-//    }
 }
