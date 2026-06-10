@@ -18,8 +18,9 @@ public class EmployeeController {
     
 
     @PostMapping("/register")
-    public Employee registerUser(@RequestBody Employee employee) {
-        return employeeService.register(employee);
+    public Map<String, String> registerUser(@RequestBody Employee employee) {
+        String token = employeeService.register(employee);
+        return Map.of("token", token);
     }
 
 

@@ -43,7 +43,7 @@ public class EmployeeService {
         return employeeRepository.findByWorkShift(workShift);
     }
 
-    public Employee register(Employee employee) {
+    public String register(Employee employee) {
         Optional<Employee> email = employeeRepository.findByEmail(employee.getEmail());
         if (email.isPresent()) {
             throw new RuntimeException("E-mail já cadastrado");
@@ -57,7 +57,9 @@ public class EmployeeService {
         String hashedPassword = passwordEncoder.encode(employee.getPassword());
         employee.setPassword(hashedPassword);
 
-        return employeeRepository.save(employee);
+        Employee saveEmployee = employeeRepository.save(employee);
+
+        return jwtService.generateAccessToken(saveEmployee);
     }
 
     public String login(int registration, String password) {
