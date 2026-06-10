@@ -17,12 +17,10 @@ public class ListingService {
 
     public Listing createListing(Listing listing) {
         listing.setStatus(Status.DISPONIVEL);
-
         listing.setBuyer(null);
         if (listing.getSeller() == null) {
             throw new RuntimeException("O anúncio precisa ter um vendedor");
         }
-
         return listingRepository.save(listing);
     }
 
@@ -31,7 +29,7 @@ public class ListingService {
         if (listing.getStatus() != Status.DISPONIVEL) {
             throw new RuntimeException("O anúncio já está reservado");
         }
-        if (listing.getSeller().equals(buyer)) {
+        if (listing.getSeller().getId().equals(buyer.getId())) {
             throw new RuntimeException("O vendedor não pode reservar a própria cesta");
         }
         listing.setStatus(Status.RESERVADO);
@@ -44,11 +42,11 @@ public class ListingService {
         if (listing.getStatus() != Status.RESERVADO) {
             throw new RuntimeException("O anúncio não pode ser cancelado");
         }
-        if (!listing.getBuyer().equals(requester) && !listing.getSeller().equals(requester) ) {
+        if (!listing.getBuyer().getId().equals(requester.getId()) && !listing.getSeller().getId().equals(requester.getId()) ) {
             throw new RuntimeException("Apenas o comprador ou vendedor pode cancelar a reserva");
         }
-        listing.setBuyer(null);
         listing.setStatus(Status.DISPONIVEL);
+        listing.setBuyer(null);
         return listingRepository.save(listing);
     }
 
@@ -57,7 +55,7 @@ public class ListingService {
         if (listing.getStatus() != Status.DISPONIVEL && listing.getStatus() != Status.RESERVADO ) {
             throw new RuntimeException("Não é possível cancelar o anúncio");
         }
-        if (!listing.getSeller().equals(seller)) {
+        if (!listing.getSeller().getId().equals(seller.getId())) {
             throw new RuntimeException("Apenas o vendedor pode cancelar o anúncio");
         }
         listing.setStatus(Status.CANCELADO);
@@ -69,7 +67,7 @@ public class ListingService {
         if (listing.getStatus() != Status.RESERVADO) {
             throw new RuntimeException("Não é possível concluir o anúncio");
         }
-        if (!listing.getSeller().equals(seller)) {
+        if (!listing.getSeller().getId().equals(seller.getId())) {
             throw new RuntimeException("Apenas o vendedor pode concluir o anúncio");
         }
         listing.setStatus(Status.CONCLUIDO);
