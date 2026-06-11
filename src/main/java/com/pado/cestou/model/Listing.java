@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,6 +28,9 @@ public class Listing {
     @ManyToOne
     @JoinColumn(name="buyer_id")
     private Employee buyer;
+
+    @Column
+    private Double price;
 
     @Column(nullable = false, updatable = false)
     private final LocalDateTime createdAt = LocalDateTime.now();

@@ -18,6 +18,9 @@ public class ListingService {
     public Listing createListing(Listing listing) {
         listing.setStatus(Status.DISPONIVEL);
         listing.setBuyer(null);
+        if (listing.getPrice() == null || listing.getPrice() <= 0) {
+            throw new RuntimeException("O preço precisar ser diferente de null e maior que zero");
+        }
         if (listing.getSeller() == null) {
             throw new RuntimeException("O anúncio precisa ter um vendedor");
         }

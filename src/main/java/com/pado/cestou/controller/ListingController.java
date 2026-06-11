@@ -2,7 +2,6 @@ package com.pado.cestou.controller;
 
 import com.pado.cestou.model.Employee;
 import com.pado.cestou.model.Listing;
-import com.pado.cestou.service.EmployeeService;
 import com.pado.cestou.service.ListingService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +21,10 @@ public class ListingController {
     }
 
     @PostMapping
-    public Listing createListing(@AuthenticationPrincipal Employee seller) {
+    public Listing createListing(@AuthenticationPrincipal Employee seller, @RequestBody Map<String, Double> input) {
         Listing listing = new Listing();
         listing.setSeller(seller);
+        listing.setPrice(input.get("price"));
         return listingService.createListing(listing);
     }
 
