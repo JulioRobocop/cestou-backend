@@ -26,6 +26,7 @@ public class JwtService {
                 .builder()
                 .subject(employee.getId().toString())
                 .claim("email", employee.getEmail())
+                .claim("name", employee.getName())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000*60*60*24))
                 .signWith(getSecretkey())
