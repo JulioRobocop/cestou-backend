@@ -5,7 +5,6 @@ import com.pado.cestou.model.Listing;
 import com.pado.cestou.service.ListingService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.ls.LSInput;
 
 import java.util.List;
 import java.util.Map;
