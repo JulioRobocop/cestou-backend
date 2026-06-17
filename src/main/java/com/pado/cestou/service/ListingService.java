@@ -1,8 +1,6 @@
 package com.pado.cestou.service;
 
-import com.pado.cestou.model.Employee;
-import com.pado.cestou.model.Listing;
-import com.pado.cestou.model.Status;
+import com.pado.cestou.model.*;
 import com.pado.cestou.repository.ListingRepository;
 import org.springframework.stereotype.Service;
 
@@ -77,8 +75,8 @@ public class ListingService {
         return listingRepository.save(listing);
     }
 
-    public List<Listing> availableListing() {
-        return listingRepository.findByStatus(Status.DISPONIVEL);
+    public List<Listing> availableListing(Sector sector, WorkShift workShift) {
+        return listingRepository.findAvailableWithFilters(Status.DISPONIVEL, sector, workShift);
     }
 
     public List<Listing> sellerListing(Employee seller) {
