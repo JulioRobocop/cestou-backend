@@ -35,14 +35,6 @@ public class EmployeeService {
         return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
     }
 
-    public List<Employee> findBySector(Sector sector) {
-        return employeeRepository.findBySector(sector);
-    }
-
-    public List<Employee> findByWorkshift(WorkShift workShift) {
-        return employeeRepository.findByWorkShift(workShift);
-    }
-
     public String register(Employee employee) {
         Optional<Employee> email = employeeRepository.findByEmail(employee.getEmail());
         if (email.isPresent()) {
