@@ -9,7 +9,5 @@ import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByRegistration(int registration);
-    List<Employee> findBySector(Sector sector);
-    List<Employee> findByWorkShift(WorkShift workShift);
     Optional<Employee> findByEmail(String email);
 }
