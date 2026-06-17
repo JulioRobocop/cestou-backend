@@ -1,7 +1,6 @@
 package com.pado.cestou.controller;
 
-import com.pado.cestou.model.Employee;
-import com.pado.cestou.model.Listing;
+import com.pado.cestou.model.*;
 import com.pado.cestou.service.ListingService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +27,8 @@ public class ListingController {
     }
 
     @GetMapping
-    public List<Listing> availableListing() {
-        return listingService.availableListing();
+    public List<Listing> availableListing(@RequestParam(required = false) Sector sector, @RequestParam(required = false) WorkShift workShift) {
+        return listingService.availableListing(sector, workShift);
     }
 
     @PutMapping("/{id}/book")
