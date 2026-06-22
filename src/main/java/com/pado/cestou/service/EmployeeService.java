@@ -1,8 +1,6 @@
 package com.pado.cestou.service;
 
 import com.pado.cestou.model.Employee;
-import com.pado.cestou.model.Sector;
-import com.pado.cestou.model.WorkShift;
 import com.pado.cestou.repository.EmployeeRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
