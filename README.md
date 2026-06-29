@@ -59,7 +59,7 @@ The API speaks JSON over HTTP and is consumed exclusively by the Vue 3 frontend.
 
 ### Core Framework
 
-**Java 17** is the language version. The project uses **Spring Boot 3.x** as the application framework, which brings together:
+**Java 21** is the language version. The project uses **Spring Boot 3.x** as the application framework, which brings together:
 
 - `spring-boot-starter-web` — Embedded Tomcat, Jackson JSON serialization, `@RestController` support
 - `spring-boot-starter-validation` — Bean Validation (JSR-380) via Hibernate Validator, used on all incoming DTOs
